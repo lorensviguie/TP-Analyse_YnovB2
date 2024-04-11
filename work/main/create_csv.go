@@ -9,6 +9,8 @@ import (
 	"work/dice"
 )
 
+var Roll_Number = 10000
+
 func main() {
 	// Ouvrir le fichier CSV en mode ajout
 	file, err := os.OpenFile("donnees.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -23,7 +25,7 @@ func main() {
 
 	// Effectuer 1000 lancers de dé pour chaque rang du dé
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Roll_Base_Dice(rank, seed)
 
@@ -40,7 +42,7 @@ func main() {
 		}
 	}
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Roll_NormalDice(rank, seed)
 
@@ -57,7 +59,7 @@ func main() {
 		}
 	}
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Roll_Parabole_Dice(rank, seed)
 
@@ -74,7 +76,7 @@ func main() {
 		}
 	}
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Power_Dice(rank, seed)
 
@@ -91,7 +93,7 @@ func main() {
 		}
 	}
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Roll_RankDice(rank, seed)
 
@@ -108,7 +110,7 @@ func main() {
 		}
 	}
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Roll_Scaledice(rank, seed)
 
@@ -125,7 +127,7 @@ func main() {
 		}
 	}
 	for rank := 1; rank <= 10; rank++ {
-		for i := 0; i < 1000; i++ {
+		for i := 0; i < Roll_Number; i++ {
 			seed := time.Now().UnixNano()
 			result := dice.Roll_unscaledice(rank, seed)
 
