@@ -20,7 +20,10 @@ func main() {
 	// Créer un écrivain CSV
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
-
+	header := []string{"Nom_dé","Seed","Rank","Résultat"} 
+	if err := writer.Write(header); err != nil {
+		log.Fatalf("Impossible d'écrire l'en-tête : %s", err)
+	}
 	// Effectuer 1000 lancers de dé pour chaque rang du dé
 	for rank := 1; rank <= 10; rank++ {
 		for i := 0; i < 1000; i++ {
