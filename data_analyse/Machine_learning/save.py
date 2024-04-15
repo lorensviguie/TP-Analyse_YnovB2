@@ -5,8 +5,6 @@ from sklearn.datasets import make_blobs, make_circles
 from sklearn.metrics import accuracy_score, log_loss
 from tqdm import tqdm
 
-
-
 def initialisation(dimensions):
     parametres = {}
     C = len(dimensions)
@@ -90,27 +88,6 @@ def normalize_data(X):
     X_normalized = (X - mean) / std
     return X_normalized, mean, std
 
-def calculate_accuracy_by_index(y_true, y_pred, index_values):
-    accuracy_by_index = {}
-    unique_index_values = np.unique(index_values)
-    for index_value in unique_index_values:
-        index_mask = index_values == index_value
-        accuracy = accuracy_score(y_true[index_mask], y_pred[index_mask])
-        accuracy_by_index[index_value] = accuracy
-    return accuracy_by_index
-
-def plot_accuracy_by_index(accuracy_by_index):
-    index_values = list(accuracy_by_index.keys())
-    accuracy_values = list(accuracy_by_index.values())
-
-    plt.figure(figsize=(10, 6))
-    plt.plot(index_values, accuracy_values, marker='o', linestyle='-')
-    plt.title('Taux de réussite de la prédiction en fonction de l\'index')
-    plt.xlabel('Index')
-    plt.ylabel('Taux de réussite de la prédiction')
-    plt.grid(True)
-    plt.show()
-
 
 def deep_neural_network(X, y, hidden_layers=(16, 16), learning_rate=0.01, n_iter=10000):
     dimensions = list(hidden_layers)
@@ -143,19 +120,13 @@ def deep_neural_network(X, y, hidden_layers=(16, 16), learning_rate=0.01, n_iter
     plt.legend()
     plt.show()
     plot_decision_boundary(X_normalized, y, parametres)  # Utiliser les données normalisées pour le tracé de la frontière de décision
-
-    # Calculer le taux de réussite de la prédiction en fonction de l'index
-    accuracy_by_index = calculate_accuracy_by_index(y.flatten(), y_pred.flatten(), df['Index'].values)
-    # Tracer le graphique du taux de réussite de la prédiction en fonction de l'index
-    plot_accuracy_by_index(accuracy_by_index)
-    
     return training_history
 
 
-df = pd.read_csv("./donnes_14h13_700-000.csv")
+df = pd.read_csv("./donnees_14h35.csv")
 df['Index'] = ((df['Nom_dé'] != df['Nom_dé'].shift()) | (df['Rank'] != df['Rank'].shift())).cumsum()
 df.dropna(inplace=True)
-df.to_csv("./donnees_16h06.csv", index=False)
+df.to_csv("./donnees_14h35.csv", index=False)
 print("Les modifications ont été enregistrées dans le fichier CSV.")
 
 X = df[['Seed', 'Index']].values.T  # Transpose pour avoir les bonnes dimensions
@@ -164,4 +135,4 @@ y = df['Résultat'].values.reshape(1, -1)
 print('dimensions de X:', X.shape)
 print('dimensions de y:', y.shape)
 
-history = deep_neural_network(X, y, hidden_layers=(70, 140, 200,100), learning_rate=0.01, n_iter=42)
+history = deep_neural_network(X, y, hidden_layers=(16, 16), learning_rate=0.01, n_iter=10000)
