@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  manipulation-donnees:
+    image: python:latest
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - .:/app
+    # Install libraries using pip during container startup
+    command: ["bash", "-c", "pip install pandas matplotlib seaborn numpy && tail -f /dev/null"]
+
+  dice-game:
+    image: golang:latest
+    restart: unless-stopped
+    working_dir: /go/src/app         
+    volumes:
+      - .:/go/src/app               
+    ports:
+      - 443:443
+      - 80:80
+    command: ["tail", "-f", "/dev/null"]
