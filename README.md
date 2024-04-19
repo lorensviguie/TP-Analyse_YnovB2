@@ -10,7 +10,13 @@
 
 ## 1. Objectif
 
-L'objectif de ce projet est de générer un ensemble de données contenant les lancers de dés, la graine utilisée et le rang du dé. Ces données seront utilisées pour analyser les résultats des différents dés et tenter de les équilibrer pour une expérience de jeu plus équitable. De plus, une intelligence artificielle (IA) sera développée pour prédire les résultats des dés en fonction de la graine et du rang.
+le but de notre projet est de genere notre porpre jeux de données, qui va contenir des lancer de dés la seed utiliser ainsi que le rank du dé
+
+ces dés viennent d'un autre projet que nous avons qui vise a crée un site qui permet de faire un jeux avec leadeboard classement sur la base d'un jeux de dé ou il existe different dé qui varie eu meme du a leur facteur rang [ici le lien de git](https://github.com/lorensviguie/STOUK-GAME)
+
+une fois ce jeux de données analysé notre objectif est d'analysé les resultats des differents dés, dans un but d'equilibrrage des dés pour malgré la debilité de notre projet faire un jeux un tous petit peu equilibré
+
+dans un deuxieme temps nous allons essayer de crée une IA qui va essayer de predire les resultat des dés en fonction de la seed du dé et du rank
 
 ## 2. Génération de données
 
@@ -46,11 +52,17 @@ Les dés ne sont pas équilibrés et le rang a souvent un impact négatif sur le
 
 ### 4.1 Modèle de réseau neuronal
 
-Un modèle de réseau neuronal de base est utilisé, comme expliqué dans [la présentation](./data_analyse/Machine_learning/Présentation%20IA.pptx)  Le modèle est modifié pour inclure la propagation vers l'avant et la rétropropagation afin d'entraîner le réseau et d'évaluer ses progrès.
+notre IA utilise un modele relativement basique
+[Lorens a ecrit un powerpoint qui explique comment crée sa premiere IA qui fonctionnent sur un seul neuronnes](./data_analyse/Machine_learning/Présentation%20IA.pptx)
+le powerpoint ci dessus explique comment crée un neuronne et pas un reseaux de neuronnes modulaire qui et le type de reseaux que nous allons utilisé il s'agit d'un modele tres basique sur son fonctionnement ou les parametres du reseaux seront fait au pif pour tester
+
+vous trouverez aussi les explication des fonction clé utilise Descente de gradient, fonction Cout, ou le perceptron cependant les problmes que l'on peut resoudre avec un seul neuronnes sont assez binaire pour notre probleme on va avoir besoin d'un reseaux de neuronnes on fait donc evoluer grandement le code. les pricipaux changement sont : l'apparation de la forwardpropagation (dans le modele precedent on entraine le neuronne dans seulement en sens ici on va l'entraine vers l'avant et reconstruire l'entrainement dans le sens inverse pour verifier l'evolution positive de notre modele)et eviter que ca parte en cacahuete trop vite (spoil ca va quand meme mal finir )
 
 ### 4.2 Encodage des données d'entrée
 
-Le modèle initial était conçu pour des entrées et des sorties binaires. Pour prendre en compte trois valeurs d'entrée (nom du dé, rang et graine), le nom du dé et le rang sont combinés pour créer des identifiants de dé uniques allant de 1 à 70 (première partie du code avant d'exécuter l'IA).
+[ici le code de base](./data_analyse/Machine_learning/save.py)
+[ici le code de notre IA](./data_analyse/Machine_learning/base.py)
+on rencontre un premier probleme ce modele basique et concu pour resoudre des problemes binaire en entré et en sortie longueur largeur et toxic ou pas, on sait pas comment faire rentré plus de 2 valeur en entré mais nous on en a 3 on va donc rusé et melangé le nom du dé avec le rang pour crée des dé unique qui vont de 1 a 70 premiere partie du code avant de lancer l'ia
 
 ### 4.3 Problème de débordement de mémoire
 
